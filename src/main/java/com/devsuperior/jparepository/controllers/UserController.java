@@ -1,0 +1,38 @@
+package com.devsuperior.jparepository.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.devsuperior.jparepository.entities.User;
+import com.devsuperior.jparepository.repositories.UserRepository;
+
+@RestController //definindo que é controller
+@RequestMapping(value = "/user") // definindo que a rota 
+public class UserController {
+	
+	@Autowired // injetando uma instância do jpa 
+	private UserRepository repository;
+	
+	//end point para buscar todos os usuários
+	@GetMapping
+	public ResponseEntity<List<User>> findAll() {
+	    List<User> result = repository.findAll();
+	    return ResponseEntity.ok(result);
+	}
+	
+	//mostrando os valores paginados com Pageable
+	@GetMapping(value= "/page")
+	public ResponseEntity<Page<User>> findAll(Pageable pageable) {
+	    Page<User> result = repository.findAll(pageable);
+	    return ResponseEntity.ok(result);
+	}
+
+
+}

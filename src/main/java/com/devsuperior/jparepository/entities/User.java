@@ -6,13 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//Mapeamento para o banco de dados - @Entity
+
 @Entity 
-@Table(name = "tb_users")
+@Table(name = "tb_users")//Mostrando o nome da tabela para o JPA
 public class User {
 	
-	
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@Id //Declarando qual vai ser o id na tabela
+	@GeneratedValue(strategy = GenerationType.IDENTITY )//Valor auto incremental no banco 
 	private Long id;
 	private String name;
 	private String email;
